@@ -3,18 +3,15 @@ php:
   - '7.1'
   - '7.2'
   - '7.3'
+
 os:
   - linux
 
 before_script: composer install --dev
 
-jobs:
-  include:
-    - stage: lint
-      script:
-        - composer lint
-        - ./vendor/bin/phpstan analyze -c vendor/nunomaduro/larastan/extension.neon -l 4 src/
-    - stage: test
-      script: ./vendor/phpunit/phpunit/phpunit --configuration phpunit.xml
+script:
+  - composer lint
+  - ./vendor/bin/phpstan analyze -c vendor/nunomaduro/larastan/extension.neon -l 4 src/
+  - ./vendor/phpunit/phpunit/phpunit --configuration phpunit.xml
 
 
